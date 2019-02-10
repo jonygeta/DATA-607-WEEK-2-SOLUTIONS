@@ -1,0 +1,31 @@
+---
+title: "Assignment – SQL and R"
+author: "Yohannes Deboch"
+date: "February 10, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+# install.packages("RMySQL")
+library(RMySQL)
+```
+
+```{r}
+mydb = dbConnect(MySQL(), user='root', password='', dbname='flights', host='localhost')
+dbListTables(mydb)
+
+# result = dbSendQuery(mydb, "select * from movies")
+# moviesdata <- fetch(result,5)
+# result
+```
+```{r}
+result = dbSendQuery(mydb, "select * from movies")
+
+# Store the result in a R data frame object. n = 5 is used to fetch first 5 rows.
+data.frame = fetch(result, n = 5)
+print(data.frame)
+```
+
